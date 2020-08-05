@@ -18,9 +18,9 @@ public class LogicStateProcessor {
                     request.getSave(), result,
                     "transition", transitionResult);
         } catch (Exception e) {
-            // TODO: maybe handle better the exceptions and add info on what went wrong
+            final String message = e.getMessage() != null ? e.getMessage() : "Error while resolving expression";
             return Map.of(
-                    request.getSave(), "NaN",
+                    request.getSave(), message,
                     "transition", request.getTransitions().getIsError());
         }
     }

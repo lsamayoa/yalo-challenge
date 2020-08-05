@@ -1,5 +1,8 @@
 package com.yalo.challenge.arithmetic;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Map;
 
 public class ArithmeticStateProcessor {
@@ -17,23 +20,24 @@ public class ArithmeticStateProcessor {
                     request.getSave(), result,
                     "transition", request.getTransitions().getNext());
         } catch (Exception e) {
-            // TODO: maybe handle better the exceptions
+            final String message = e.getMessage() != null ? e.getMessage() : "Error while resolving expression";
             return Map.of(
-                    request.getSave(), "NaN",
+                    request.getSave(), message,
                     "transition", request.getTransitions().getError());
         }
     }
 
     public static class ArithmeticStateTransitionRequest {
-        private final String expression;
-        private final String save;
-        private final ArithmeticStateTransition transitions;
-        private final Map<String, Double> context;
+        private String expression;
+        private String save;
+        private ArithmeticStateTransition transitions;
+        private Map<String, Double> context;
 
-        public ArithmeticStateTransitionRequest(String expression,
-                                                String save,
-                                                ArithmeticStateTransition transitions,
-                                                Map<String, Double> context) {
+        @JsonCreator
+        public ArithmeticStateTransitionRequest(@JsonProperty("expression") String expression,
+                                                @JsonProperty("save") String save,
+                                                @JsonProperty("transitions") ArithmeticStateTransition transitions,
+                                                @JsonProperty("context") Map<String, Double> context) {
             this.expression = expression;
             this.save = save;
             this.transitions = transitions;
@@ -61,7 +65,9 @@ public class ArithmeticStateProcessor {
         private final long next;
         private final long error;
 
-        public ArithmeticStateTransition(long next, long error) {
+        @JsonCreator
+        public ArithmeticStateTransition(@JsonProperty("next") long next,
+                                         @JsonProperty("error") long error) {
             this.next = next;
             this.error = error;
         }
