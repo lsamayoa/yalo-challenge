@@ -10,7 +10,7 @@ class LogicExpressionVistor extends ArithmeticVisitor {
 
     visitLogicExpression(ctx) {
         if (ctx.parentesisValue != null) {
-            return visitLogicExpression(ctx.parentesisValue);
+            return this.visitLogicExpression(ctx.parentesisValue);
         }
 
         if (ctx.left != null && ctx.right != null) {
@@ -67,6 +67,10 @@ class LogicExpressionVistor extends ArithmeticVisitor {
                 return left == right;
             case "!=":
                 return left != right;
+            case "||":
+                return left || right;
+            case "&&":
+                return left && right;
         }
         throw new Error("Unsupported or invalid expression");
     }
