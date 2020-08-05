@@ -13,6 +13,41 @@ public class LogicExpressionProcessorTest {
 
     public static TestCase[] testCases() {
         return new TestCase[]{
+                new TestCase("10 > 5", Collections.emptyMap(), true),
+                new TestCase("6545984 > 84980", Collections.emptyMap(), true),
+                new TestCase("21340 > 1234", Collections.emptyMap(), true),
+
+                new TestCase("10 < 5", Collections.emptyMap(), false),
+                new TestCase("16265464 < 234523", Collections.emptyMap(), false),
+                new TestCase("12345 < 23452", Collections.emptyMap(), true),
+
+                new TestCase("10 <= 5.5", Collections.emptyMap(), false),
+                new TestCase("10 <= 5.6", Collections.emptyMap(), false),
+                new TestCase("10 <= 5.9", Collections.emptyMap(), false),
+
+                new TestCase("10 >= 512341", Collections.emptyMap(), false),
+                new TestCase("123410 >= 5", Collections.emptyMap(), true),
+                new TestCase("1342430 >= 5", Collections.emptyMap(), true),
+
+                new TestCase("10 == 12345", Collections.emptyMap(), false),
+                new TestCase("10 == 5", Collections.emptyMap(), false),
+                new TestCase("10 == 10", Collections.emptyMap(), true),
+
+                new TestCase("10 != 5", Collections.emptyMap(), true),
+                new TestCase("10 != 10", Collections.emptyMap(), false),
+                new TestCase("10 != 165451", Collections.emptyMap(), true),
+
+                new TestCase("10 == 10 && 5 == 5", Collections.emptyMap(), true),
+                new TestCase("10 == 6 && 5 == 5", Collections.emptyMap(), false),
+                new TestCase("10 == 6 && 6 == 5", Collections.emptyMap(), false),
+
+                new TestCase("10 == 10 || 5 == 5", Collections.emptyMap(), true),
+                new TestCase("10 == 6 || 5 == 5", Collections.emptyMap(), true),
+                new TestCase("10 == 6 || 6 == 5", Collections.emptyMap(), false),
+
+                new TestCase("(10 == 6) == (6 == 5)", Collections.emptyMap(), true),
+                new TestCase("(10 == 6) != (6 == 5)", Collections.emptyMap(), false),
+
                 new TestCase("10 > (5 *12)**5", Collections.emptyMap(), false),
                 new TestCase("10 < (5 *12)**5", Collections.emptyMap(), true),
                 new TestCase("0 == 10", Collections.emptyMap(), false),
@@ -21,14 +56,14 @@ public class LogicExpressionProcessorTest {
         };
     }
 
+    private final LogicExpressionProcessor logicExpressionProcessor = new LogicExpressionProcessor();
+
     @ParameterizedTest
     @MethodSource("com.yalo.challenge.logic.LogicExpressionProcessorTest#testCases")
     public void process(TestCase testCase) {
-        LogicExpressionProcessor logicExpressionProcessor = new LogicExpressionProcessor();
         Boolean result = logicExpressionProcessor.process(testCase.getExpression(), testCase.getContext());
         assertEquals(testCase.getExpectedResult(), result);
     }
-
 
     private static class TestCase {
         private final String expression;

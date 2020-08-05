@@ -6,16 +6,9 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.util.Collections;
 import java.util.Map;
 
 public class ArithmeticExpressionProcessor {
-
-    public static void main(String... args) {
-        ArithmeticExpressionProcessor expressionProcessor = new ArithmeticExpressionProcessor();
-        Double result = expressionProcessor.process("5+5", Collections.emptyMap());
-        System.out.println(result);
-    }
 
     public Double process(String expression, Map<String, Double> context) {
         final CharStream input = CharStreams.fromString(expression);

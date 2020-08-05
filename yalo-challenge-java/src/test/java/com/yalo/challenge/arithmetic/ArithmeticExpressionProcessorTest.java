@@ -13,13 +13,32 @@ public class ArithmeticExpressionProcessorTest {
 
     public static TestCase[] testCases() {
         return new TestCase[]{
+                new TestCase("+5", Collections.emptyMap(), 5.0),
+                new TestCase("+-----5", Collections.emptyMap(), -5.0),
+
                 new TestCase("5+5", Collections.emptyMap(), 10.0),
+                new TestCase("5+7+abc", Collections.singletonMap("abc", 10.0), 22.0),
+
                 new TestCase("5-5", Collections.emptyMap(), 0.0),
+                new TestCase("5-5-abc123", Collections.singletonMap("abc123", 10.0), -10.0),
+
+                new TestCase("5/5", Collections.emptyMap(), 1.0),
+                new TestCase("5/5/p2pa", Collections.singletonMap("p2pa", 10.0), 0.1),
+
+                new TestCase("5*5", Collections.emptyMap(), 25.0),
+                new TestCase("5*abc", Collections.singletonMap("abc", 20.0), 100.0),
+
+                new TestCase("5**5", Collections.emptyMap(), 3125.0),
+                new TestCase("5**5**op2", Collections.singletonMap("op2", 2.0), 9765625.0),
+
+                new TestCase("5/xyz123*7", Collections.singletonMap("xyz123", 7.0), 5.0),
+                new TestCase("(5*5) + (78**2/5) * 24 (--5*5+96)", Collections.emptyMap(), 29228.199999999997),
                 new TestCase("5+10-52*(4932348*44)/50**10", Collections.emptyMap(), 14.999999884439427),
+                new TestCase("5**5**(op2!)", Collections.singletonMap("op2", 3.0), 9.313225746154785E20),
         };
     }
 
-    private ArithmeticExpressionProcessor expressionProcessor = new ArithmeticExpressionProcessor();
+    private final ArithmeticExpressionProcessor expressionProcessor = new ArithmeticExpressionProcessor();
 
     @ParameterizedTest
     @MethodSource("com.yalo.challenge.arithmetic.ArithmeticExpressionProcessorTest#testCases")

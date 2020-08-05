@@ -19,6 +19,11 @@ public class ArithmeticExpressionVisitor extends ArithmeticBaseVisitor<Double> {
             return visitExpression(ctx.parentesisValue);
         }
 
+        if(ctx.factorialValue != null) {
+            Double value = visitExpression(ctx.factorialValue);
+            return factorial(value);
+        }
+
         if (ctx.operator == null) {
             throw new UnsupportedOperationException("An operator is needed to resolve expressions");
         }
@@ -42,6 +47,13 @@ public class ArithmeticExpressionVisitor extends ArithmeticBaseVisitor<Double> {
         }
 
         throw new UnsupportedOperationException("Unsupported or invalid expression");
+    }
+
+    public static double factorial(double input){
+        if (input==0)
+            return 1;
+        else
+            return input * factorial(input-1);
     }
 
     @Override

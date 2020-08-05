@@ -27,6 +27,7 @@ expression
    |  left=expression  operator=(TIMES | DIV)  right=expression
    |  left=expression  operator=(PLUS | MINUS) right=expression
    |  LPAREN parentesisValue=expression RPAREN
+   |  factorialValue=expression FACT
    |  signedValue=signedAtom
    ;
 
@@ -112,16 +113,18 @@ DIV
    : '/'
    ;
 
-
 POINT
    : '.'
    ;
-
 
 POW
    : '^'
    | '**'
    ;
+
+FACT
+  : '!'
+  ;
 
 GTE
    : '>='

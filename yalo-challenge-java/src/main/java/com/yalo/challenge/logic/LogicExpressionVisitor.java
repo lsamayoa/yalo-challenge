@@ -13,10 +13,6 @@ public class LogicExpressionVisitor extends ArithmeticBaseVisitor<Boolean> {
         this.arithmeticVisitor = new ArithmeticExpressionVisitor(context);
     }
 
-    public LogicExpressionVisitor(ArithmeticExpressionVisitor arithmeticVisitor) {
-        this.arithmeticVisitor = arithmeticVisitor;
-    }
-
     @Override
     public Boolean visitLogicExpression(ArithmeticParser.LogicExpressionContext ctx) {
         if (ctx.parentesisValue != null) {
