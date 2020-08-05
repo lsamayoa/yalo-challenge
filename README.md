@@ -3,7 +3,7 @@
 Como esta estructurado este repo:
 - CHALLENGE.md: Las instrucciones del challenge tal y como fueron entregadas
 - yalo-challenge-java: La solucion al challenge utilizando java como lenguaje de programacion, projecto maven.
-- yalo-challenge-node: Si me da tiempo aqui pondre el equivalente en el lenguaje javascript del challenge en java. **No me dio tiempo asi que el progreso que logre lo agregue en otro branch**
+- yalo-challenge-node: Si me da tiempo aqui pondre el equivalente en el lenguaje javascript del challenge en java. **No me dio tiempo de hacer todas las pruebas unitarias pero la applicacion deberia de poder procesar los inputs indicados en el challenge**
 
 # Preface
 

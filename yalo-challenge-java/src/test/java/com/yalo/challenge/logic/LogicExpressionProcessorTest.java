@@ -40,6 +40,7 @@ public class LogicExpressionProcessorTest {
                 new TestCase("10 == 10 && 5 == 5", Collections.emptyMap(), true),
                 new TestCase("10 == 6 && 5 == 5", Collections.emptyMap(), false),
                 new TestCase("10 == 6 && 6 == 5", Collections.emptyMap(), false),
+                new TestCase("10 == 6 && 6 == xyz", Collections.singletonMap("xyz", 5.0), false),
 
                 new TestCase("10 == 10 || 5 == 5", Collections.emptyMap(), true),
                 new TestCase("10 == 6 || 5 == 5", Collections.emptyMap(), true),
@@ -53,6 +54,10 @@ public class LogicExpressionProcessorTest {
                 new TestCase("0 == 10", Collections.emptyMap(), false),
                 new TestCase("10 == 10 && 5 != 10", Collections.emptyMap(), true),
                 new TestCase("10 != 10", Collections.emptyMap(), false),
+
+                new TestCase("10 != xyz", Collections.singletonMap("xyz", 10.0), false),
+
+
         };
     }
 
